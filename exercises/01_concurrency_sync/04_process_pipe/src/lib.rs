@@ -166,8 +166,7 @@ pub fn run_command_with_result(program: &str, args: &[&str]) -> io::Result<Strin
     let output = Command::new(program)
         .args(args)
         .stdout(Stdio::piped())
-        .output()
-        .expect("Failed to execute command");
+        .output()?;
 
     String::from_utf8(output.stdout).map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e.to_string()))
 }
